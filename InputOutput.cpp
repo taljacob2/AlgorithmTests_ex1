@@ -20,7 +20,7 @@ int InputOutput::getSize() noexcept(false) {
 
     // get the Array size:
     int size;
-//    std::cout << "Please input the size of the Array: ";
+    //    std::cout << "Please input the size of the Array: ";
     std::cin >> _input;
     if (checkLegalUnsignedIntInput(_input)) {
 
@@ -38,7 +38,7 @@ int InputOutput::getSize() noexcept(false) {
 int InputOutput::getSerialSizeOfTheElementToLookFor(int size) noexcept(false) {
 
     // get the serialSizeOfTheElementToLookFor:
-//    std::cout << "Please input the serialSizeOfTheElementToLookFor in the Array: ";
+    //    std::cout << "Please input the serialSizeOfTheElementToLookFor in the Array: ";
     int serialSizeOfTheElementToLookFor;
     std::cin >> _input;
     if (checkLegalUnsignedIntInput(_input)) {
@@ -67,7 +67,7 @@ int InputOutput::getSerialSizeOfTheElementToLookFor(int size) noexcept(false) {
 void InputOutput::setArrayContents(double *array, int size) noexcept(false) {
 
     // get Array content numbers:
-//    std::cout << "Please input the number(s) in the Array: ";
+    //    std::cout << "Please input the number(s) in the Array: ";
 
     for (int i = 0; i < size; ++i) {
 
@@ -86,8 +86,8 @@ void InputOutput::setArrayContents(double *array, int size) noexcept(false) {
     }
 }
 
-double *InputOutput::getAllInputs(int &size,
-                                  int &serialSizeOfTheElementToLookFor) noexcept(false) {
+double *InputOutput::getAllInputs(
+        int &size, int &serialSizeOfTheElementToLookFor) noexcept(false) {
     double *array = nullptr;
     try {
         // get array 'size' + get 'serialSizeOfTheElementToLookFor':
@@ -115,9 +115,9 @@ bool InputOutput::checkLegalUnsignedIntInput(my_string &input) {
 }
 
 bool InputOutput::checkLegalDoubleInput(my_string &input) {
-    unsigned char precision = 0; // current digits after the dot.
-    bool dotPassed = false;
-    bool signPassed = false;
+    unsigned char precision  = 0; // current digits after the dot.
+    bool          dotPassed  = false;
+    bool          signPassed = false;
     for (char c : input) {
         if ((c == '+') || (c == '-')) {
             if (signPassed) {
@@ -127,7 +127,7 @@ bool InputOutput::checkLegalDoubleInput(my_string &input) {
             continue;
         }
         if (c == '.') {
-            if(dotPassed){
+            if (dotPassed) {
                 return false; // input is invalid. we don't allow more than 1 dot.
             }
             dotPassed = true;

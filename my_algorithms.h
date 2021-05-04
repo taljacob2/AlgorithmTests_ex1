@@ -13,19 +13,15 @@
  * @version 1.0
  */
 class my_algorithms {
-public:
-
+  public:
     /**
      * @brief generic algorithm to copy an array.
      *
      * @returns the `new` copied array.
      */
-    template<class T>
-    static T *copyArray(const T *array, int size) {
+    template<class T> static T *copyArray(const T *array, int size) {
         auto *copiedArr = new T[size];
-        for (int i = 0; i < size; ++i) {
-            copiedArr[i] = array[i];
-        }
+        for (int i = 0; i < size; ++i) { copiedArr[i] = array[i]; }
         return copiedArr;
     }
 
@@ -37,9 +33,8 @@ public:
      * @param index1 the first element index to be swapped.
      * @param index2 the second element index to be swapped.
      */
-    template<class T>
-    static void swap(T *array, int index1, int index2) {
-        T tmp = array[index1];
+    template<class T> static void swap(T *array, int index1, int index2) {
+        T tmp         = array[index1];
         array[index1] = array[index2];
         array[index2] = tmp;
     }
@@ -51,9 +46,8 @@ public:
      * @param element1 first element.
      * @param element2 second element.
      */
-    template<class T>
-    static void swap(T &element1, T &element2) {
-        T tmp = element1;
+    template<class T> static void swap(T &element1, T &element2) {
+        T tmp    = element1;
         element1 = element2;
         element2 = tmp;
     }
@@ -64,21 +58,19 @@ public:
      * @param array
      * @param size the size of the array.
      */
-    template<class T>
-    static void sort_insertion(T *array,
-                               int size) {
-        if (size <= 1) {
-            return;
-        }
+    template<class T> static void sort_insertion(T *array, int size) {
+        if (size <= 1) { return; }
 
         for (int head_index = 1; head_index < size; ++head_index) {
             int curr_head_index = head_index;
-            for (int predecessor_index = head_index - 1;
-                 predecessor_index >= 0; predecessor_index--) {
+            for (int predecessor_index = head_index - 1; predecessor_index >= 0;
+                 predecessor_index--) {
                 if ((array)[predecessor_index] > (array)[curr_head_index]) {
                     swap<T>((array), curr_head_index, predecessor_index);
                     curr_head_index = predecessor_index;
-                } else { break; }
+                } else {
+                    break;
+                }
             }
         }
     }
@@ -92,8 +84,7 @@ public:
      * @see sort_insertion (T *, int)
      */
     template<class T>
-    static void sort_insertion_(T *array,
-                                int size,
+    static void sort_insertion_(T *array, int size,
                                 char *&outputParameterForThisFunctionName) {
 
         // get this function's name:
@@ -121,9 +112,9 @@ public:
      * @see swap(T &, T &) - for swapping the elements' indexes in the array.
      */
     template<class T>
-    static int
-    partition(T *array, int lowestIndexPossible, int highestIndexPossible,
-              int indexOfElementToServeAsPivot = 0) {
+    static int partition(T *array, int lowestIndexPossible,
+                         int highestIndexPossible,
+                         int indexOfElementToServeAsPivot = 0) {
 
         /*
          * set initial-`pivotIndex` to be the `first` `element` in the array,
@@ -148,13 +139,17 @@ public:
                     swap<T>(array, pivotIndex, nonPivotIndex);
                     swap<int>(pivotIndex, nonPivotIndex);
                     ++nonPivotIndex;
-                } else { --nonPivotIndex; }
+                } else {
+                    --nonPivotIndex;
+                }
             } else if (nonPivotIndex < pivotIndex) {
                 if (array[nonPivotIndex] > array[pivotIndex]) {
                     swap<T>(array, pivotIndex, nonPivotIndex);
                     swap<int>(pivotIndex, nonPivotIndex);
                     --nonPivotIndex;
-                } else { ++nonPivotIndex; }
+                } else {
+                    ++nonPivotIndex;
+                }
             } else if (nonPivotIndex == pivotIndex) {
                 return pivotIndex;
             }
@@ -178,8 +173,8 @@ public:
     static T
     selection_TheIthElementInItsSize(T *array, int size,
                                      int serialSizeOfTheElementToLookFor) {
-        return selectTheIthElementInItsSize_UnSecured(array, 0, size - 1,
-                                                      serialSizeOfTheElementToLookFor);
+        return selectTheIthElementInItsSize_UnSecured(
+                array, 0, size - 1, serialSizeOfTheElementToLookFor);
     }
 
     /**
@@ -191,15 +186,14 @@ public:
      * @see selection_TheIthElementInItsSize (T *, int, int)
      */
     template<class T>
-    static T
-    selection_TheIthElementInItsSize_(T *array, int size,
-                                      int serialSizeOfTheElementToLookFor,
-                                      char *&outputParameterForThisFunctionName) {
+    static T selection_TheIthElementInItsSize_(
+            T *array, int size, int serialSizeOfTheElementToLookFor,
+            char *&outputParameterForThisFunctionName) {
 
         // get this function's name:
         outputParameterForThisFunctionName = const_cast<char *>(__func__);
-        return selection_TheIthElementInItsSize(array, size,
-                                                serialSizeOfTheElementToLookFor);
+        return selection_TheIthElementInItsSize(
+                array, size, serialSizeOfTheElementToLookFor);
     }
 
     /**
@@ -209,13 +203,10 @@ public:
      * @param array the array to be sorted.
      * @param size the size of the given @p array.
      */
-    template<class T>
-    static void bubbleSort(T *array, int size) {
+    template<class T> static void bubbleSort(T *array, int size) {
         for (int i = 0; i < size; ++i) {
             for (int j = size - 1; j > i; --j) {
-                if (array[i] > array[j]) {
-                    swap(array, i, j);
-                }
+                if (array[i] > array[j]) { swap(array, i, j); }
             }
         }
     }
@@ -240,35 +231,25 @@ public:
             bubbleSort(array, size);
             return array[serialSizeOfTheElementToLookFor - 1];
         } else {
-            int divisionCounter = 1;
+            int divisionCounter      = 1;
             int lastDividedArraySize = DIVISION;
-            int divisionInteger = 1;
+            int divisionInteger      = 1;
             whileOfBubbleSort_division_TheIthElementInItsSize<T, DIVISION>(
-                    array, size,
-                    divisionCounter,
-                    divisionInteger,
+                    array, size, divisionCounter, divisionInteger,
                     lastDividedArraySize);
             T *takenMiddlesArray = new T[divisionCounter];
-            getMiddleArray_division_TheIthElementInItsSize<T, DIVISION>(array,
-                                                                        takenMiddlesArray,
-                                                                        divisionCounter,
-                                                                        lastDividedArraySize);
+            getMiddleArray_division_TheIthElementInItsSize<T, DIVISION>(
+                    array, takenMiddlesArray, divisionCounter,
+                    lastDividedArraySize);
             int k_index;
             try {
                 getTakenMiddlesArrayPivotElementAndIndex_division_TheIthElementInItsSize<
-                        T, DIVISION>(
-                        array,
-                        size, takenMiddlesArray,
-                        divisionCounter,
-                        k_index);
-            } catch (std::exception &e) {
-                return 0;
-            }
+                        T, DIVISION>(array, size, takenMiddlesArray,
+                                     divisionCounter, k_index);
+            } catch (std::exception &e) { return 0; }
             delete[] takenMiddlesArray;
-            return returnOf_division_TheIthElementInItsSize<T, DIVISION>(array,
-                                                                         size,
-                                                                         serialSizeOfTheElementToLookFor,
-                                                                         k_index);
+            return returnOf_division_TheIthElementInItsSize<T, DIVISION>(
+                    array, size, serialSizeOfTheElementToLookFor, k_index);
         }
     }
 
@@ -280,8 +261,8 @@ public:
     static T
     quintuplet_TheIthElementInItsSize(T *array, int size,
                                       int serialSizeOfTheElementToLookFor) {
-        return division_TheIthElementInItsSize<T, 5>(array, size,
-                                                     serialSizeOfTheElementToLookFor);
+        return division_TheIthElementInItsSize<T, 5>(
+                array, size, serialSizeOfTheElementToLookFor);
     }
 
     /**
@@ -293,25 +274,21 @@ public:
      * @see quintuplet_TheIthElementInItsSize (T *, int, int)
      */
     template<class T>
-    static T
-    quintuplet_TheIthElementInItsSize_(T *array, int size,
-                                       int serialSizeOfTheElementToLookFor,
-                                       char *&outputParameterForThisFunctionName) {
+    static T quintuplet_TheIthElementInItsSize_(
+            T *array, int size, int serialSizeOfTheElementToLookFor,
+            char *&outputParameterForThisFunctionName) {
 
         // get this function's name:
         outputParameterForThisFunctionName = const_cast<char *>(__func__);
-        return quintuplet_TheIthElementInItsSize<T>(array, size,
-                                                    serialSizeOfTheElementToLookFor);
+        return quintuplet_TheIthElementInItsSize<T>(
+                array, size, serialSizeOfTheElementToLookFor);
     }
 
-private:
-
+  private:
     template<class T, int DIVISION>
-    static void
-    whileOfBubbleSort_division_TheIthElementInItsSize(T *array, int size,
-                                                      int &divisionCounter,
-                                                      int &divisionInteger,
-                                                      int &lastDividedArraySize) {
+    static void whileOfBubbleSort_division_TheIthElementInItsSize(
+            T *array, int size, int &divisionCounter, int &divisionInteger,
+            int &lastDividedArraySize) {
         while (divisionInteger >= 1) {
             divisionInteger = (size / (divisionCounter * DIVISION));
             if (divisionInteger < 1) {
@@ -337,10 +314,9 @@ private:
     }
 
     template<class T, int DIVISION>
-    static void getMiddleArray_division_TheIthElementInItsSize(T *array,
-                                                               T *takenMiddlesArray,
-                                                               int divisionCounter,
-                                                               int lastDividedArraySize) {
+    static void getMiddleArray_division_TheIthElementInItsSize(
+            T *array, T *takenMiddlesArray, int divisionCounter,
+            int lastDividedArraySize) {
         int i = 0;
         for (; i < divisionCounter - 1; ++i) {
 
@@ -348,17 +324,13 @@ private:
              * get middleElement in each divided-array,
              * and insert it to `takenMiddlesArray`:
              */
-            takenMiddlesArray[i] =
-                    getMiddleElementInASortedArray(
-                            array + (i * DIVISION),
-                            DIVISION);
+            takenMiddlesArray[i] = getMiddleElementInASortedArray(
+                    array + (i * DIVISION), DIVISION);
         }
 
         // get middleElement from the last leftOver array (special case):
-        takenMiddlesArray[i] =
-                getMiddleElementInASortedArray(
-                        array + (i * DIVISION),
-                        lastDividedArraySize);
+        takenMiddlesArray[i] = getMiddleElementInASortedArray(
+                array + (i * DIVISION), lastDividedArraySize);
     }
 
     template<class T, int DIVISION>
@@ -372,15 +344,14 @@ private:
          * with a `recursive` call:
          */
         T takenMiddlesArray_medianPivotElement =
-                division_TheIthElementInItsSize<T, DIVISION>(takenMiddlesArray,
-                                                             divisionCounter,
-                                                             ((divisionCounter -
-                                                               1) / 2) + 1);
+                division_TheIthElementInItsSize<T, DIVISION>(
+                        takenMiddlesArray, divisionCounter,
+                        ((divisionCounter - 1) / 2) + 1);
 
         // search for the `takenMiddlesArray_medianPivotElement` index in `array`:
         takenMiddlesArray_medianPivotElement_indexInArray = 0;
         for (; takenMiddlesArray_medianPivotElement_indexInArray < size;
-               ++takenMiddlesArray_medianPivotElement_indexInArray) {
+             ++takenMiddlesArray_medianPivotElement_indexInArray) {
             if (array[takenMiddlesArray_medianPivotElement_indexInArray] ==
                 takenMiddlesArray_medianPivotElement) {
                 break;
@@ -410,8 +381,7 @@ private:
     }
 
     template<class T, int DIVISION>
-    static T returnOf_division_TheIthElementInItsSize(T *array, int size,
-                                                      int i,
+    static T returnOf_division_TheIthElementInItsSize(T *array, int size, int i,
                                                       int k_index) {
         int i_index = i - 1;
 
@@ -420,11 +390,11 @@ private:
                                                                 i);
         } else if (k_index < i_index) {
             return division_TheIthElementInItsSize<T, DIVISION>(
-                    array + (k_index + 1),
-                    size - (k_index + 1),
+                    array + (k_index + 1), size - (k_index + 1),
                     (i_index - k_index));
         } else if (i_index == k_index) {
-            return array[k_index]; // return the value of the i'th element in its size.
+            return array
+                    [k_index]; // return the value of the i'th element in its size.
         }
         return 0; // ERROR CASE
     }
@@ -453,14 +423,13 @@ private:
      * @see selectTheIthElementInItsSize(T *, int, int)
      */
     template<class T>
-    static T
-    selectTheIthElementInItsSize_UnSecured(T *array, int lowestIndexToSearchAt,
-                                           int highestIndexToSearchAt,
-                                           int serialSizeOfTheElementToLookFor) {
+    static T selectTheIthElementInItsSize_UnSecured(
+            T *array, int lowestIndexToSearchAt, int highestIndexToSearchAt,
+            int serialSizeOfTheElementToLookFor) {
 
         // get a pivotIndex:
-        int pivotIndex = partition(array, lowestIndexToSearchAt,
-                                   highestIndexToSearchAt);
+        int pivotIndex =
+                partition(array, lowestIndexToSearchAt, highestIndexToSearchAt);
 
         // note the `+1` to include the `pivot` element in the lowPartition:
         int lowPartitionSize = pivotIndex - lowestIndexToSearchAt + 1;
@@ -475,15 +444,13 @@ private:
          * for the wanted element with an another recursive attempt:
          */
         if (serialSizeOfTheElementToLookFor < lowPartitionSize) {
-            return selectTheIthElementInItsSize_UnSecured(array,
-                                                          lowestIndexToSearchAt,
-                                                          pivotIndex - 1,
-                                                          serialSizeOfTheElementToLookFor);
+            return selectTheIthElementInItsSize_UnSecured(
+                    array, lowestIndexToSearchAt, pivotIndex - 1,
+                    serialSizeOfTheElementToLookFor);
         } else {
-            return selectTheIthElementInItsSize_UnSecured(array, pivotIndex + 1,
-                                                          highestIndexToSearchAt,
-                                                          serialSizeOfTheElementToLookFor -
-                                                          lowPartitionSize);
+            return selectTheIthElementInItsSize_UnSecured(
+                    array, pivotIndex + 1, highestIndexToSearchAt,
+                    serialSizeOfTheElementToLookFor - lowPartitionSize);
         }
     }
 

@@ -1,6 +1,6 @@
+#include "InputOutput.h"
 #include <iostream>
 #include <string>
-#include "InputOutput.h"
 
 /**
  * @mainpage mivnei_netunim targil tichnuti 1
@@ -10,12 +10,12 @@
  */
 int main() {
     InputOutput inputOutput; // local object.
-    double *array;
-    int size;
-    int serialSizeOfTheElementToLookFor;
-    double *insertionSortedArray;
-    double selectionElementRequested;
-    double quintupletElementRequested;
+    double *    array;
+    int         size;
+    int         serialSizeOfTheElementToLookFor;
+    double *    insertionSortedArray;
+    double      selectionElementRequested;
+    double      quintupletElementRequested;
 
     // get all inputs:
     try {
